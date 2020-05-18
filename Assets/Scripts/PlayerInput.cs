@@ -12,25 +12,23 @@ public class PlayerInput : MonoBehaviour
         if (!touched)
         {
             var racquetRect = GetRacquetRect();
-            foreach (var t in Input.touches)
+            foreach (var pair in InputWrapper.AllInput)
             {
-                if (racquetRect.Contains(t.position))
+                if (racquetRect.Contains(pair.Value))
                 {
                     touched = true;
-                    fingerId = t.fingerId;
+                    fingerId = pair.Key;
                 }
             }
         }
         else
         {
-            var touchIndex = GetTouchIndex(fingerId);
-            if (touchIndex == -1)
+            if (!InputWrapper.AllInput.TryGetValue(fingerId, out var pos))
             {
                 touched = false;
                 return;
-            }
-            var touchPos = Input.touches[touchIndex].position;
-            var newPosX = Camera.main.ScreenToWorldPoint(touchPos).x;
+            } 
+            var newPosX = Camera.main.ScreenToWorldPoint(pos).x;
             transform.position = new Vector3(newPosX, transform.position.y, transform.position.z);
         }
     }
@@ -41,16 +39,5 @@ public class PlayerInput : MonoBehaviour
         var max = Camera.main.WorldToScreenPoint(RacquetCollider.bounds.max);
         var screenRect = new Rect(min, max - min);
         return screenRect;
-    }
-
-    int GetTouchIndex(int fingerId)
-    {
-        for (int i = 0; i < Input.touches.Length; i++)
-        {
-            Touch t = Input.touches[i];
-            if (t.fingerId == fingerId)
-                return i;
-        }
-        return -1;
     }
 }

@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        transform.position += new Vector3(Direction.x, Direction.y) * Speed * Time.deltaTime;
+        transform.position += new Vector3(Direction.x, Direction.y).normalized * Speed * Time.deltaTime;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -17,5 +17,6 @@ public class Ball : MonoBehaviour
         if (collision.contactCount < 0)
             return;
         Direction = Vector3.Reflect(Direction, collision.contacts[0].normal);
+        Debug.Log("Impulse: " + collision.contacts[0].tangentImpulse);
     }
 }
