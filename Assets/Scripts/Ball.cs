@@ -13,10 +13,8 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("CollisionEnter");
         if (collision.contactCount < 0)
             return;
         Direction = Vector3.Reflect(Direction, collision.contacts[0].normal);
-        Debug.Log("Impulse: " + collision.contacts[0].tangentImpulse);
     }
 }

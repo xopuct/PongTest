@@ -4,8 +4,16 @@ using System.Collections;
 public class PlayerInput : MonoBehaviour
 {
     public BoxCollider2D RacquetCollider;
+    public Rect Bounds;
+
     bool touched = false;
     int fingerId = -1;
+    void Start()
+    {
+        var min = Camera.main.ViewportToWorldPoint(Camera.main.rect.min);
+        var max = Camera.main.ViewportToWorldPoint(Camera.main.rect.max);
+        Bounds = new Rect(min, max - min);
+    }
 
     void Update()
     {
@@ -27,8 +35,9 @@ public class PlayerInput : MonoBehaviour
             {
                 touched = false;
                 return;
-            } 
+            }
             var newPosX = Camera.main.ScreenToWorldPoint(pos).x;
+            newPosX = Mathf.Clamp(newPosX, Bounds.min.x + RacquetCollider.bounds.size.x / 2, Bounds.max.x - RacquetCollider.bounds.size.x / 2);
             transform.position = new Vector3(newPosX, transform.position.y, transform.position.z);
         }
     }
