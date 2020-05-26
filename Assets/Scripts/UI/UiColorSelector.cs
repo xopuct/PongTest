@@ -6,29 +6,28 @@ using System.Linq;
 
 public class UiColorSelector : MonoBehaviour
 {
-    public Color[] Colors;
+    public ConfigColor Colors;
     public string Property;
     public UiColorContainer Prototype;
 
     List<GameObject> instances = new List<GameObject>();
+    Color[] colors;
 
-    private void Start()
+    private void Start() => Prototype.gameObject.SetActive(false);
+
+    private void OnEnable()
     {
-        Prototype.gameObject.SetActive(false); 
+        MaybeInitColors();
+        UpdateData();
     }
-
-    private void OnEnable() => UpdateData();
 
     void UpdateData()
     {
         foreach (var i in instances)
             Destroy(i);
-        Color selectedColor = Colors.Length > 0 ? Colors[0] : Color.white;
-        var setting = Settings.Get(Property);
-        if (setting.HasValue())
-            selectedColor = JsonUtility.FromJson<Color>(PlayerPrefs.GetString(Property));
+        Color selectedColor = GetSelectedColor();
 
-        foreach (var c in Colors)
+        foreach (var c in colors)
         {
             var inst = Instantiate(Prototype, transform);
             inst.gameObject.SetActive(true);
@@ -39,5 +38,20 @@ public class UiColorSelector : MonoBehaviour
         }
     }
 
+    private Color GetSelectedColor()
+    {
+        var setting = Settings.Get(Property);
+        if (setting.HasValue())
+            return JsonUtility.FromJson<Color>(PlayerPrefs.GetString(Property));
+        return colors.Length > 0 ? colors[0] : Color.white;
+    }
+
     void OnSelectColor(Color color) => Settings.Get(Property).SetValue(color);
+
+    private void MaybeInitColors()
+    {
+        colors = Colors.Get(Property);
+        if (colors == null)
+            colors = new[] { Color.white };
+    }
 }

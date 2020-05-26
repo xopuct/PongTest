@@ -413,11 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f42b19fc0a0544f85fd95d557a1db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Colors:
-  - {r: 0.0069999695, g: 0.86979383, b: 1, a: 1}
-  - {r: 1, g: 0.78845626, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0.2587607, a: 1}
-  - {r: 1, g: 0, b: 0.9685755, a: 1}
+  Colors: {fileID: 11400000, guid: 56c7cfddea53a744aa96eb21618be23b, type: 2}
   Property: BallColor
   Prototype: {fileID: 1161325709}
 --- !u!1 &123229402
@@ -431,6 +427,7 @@ GameObject:
   - component: {fileID: 123229404}
   - component: {fileID: 123229403}
   - component: {fileID: 123229405}
+  - component: {fileID: 123229406}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -487,6 +484,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8754d99d55ca5654db428742e48c4521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &123229406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123229402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6423812b49587846b97e1bdb6654332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Colors: {fileID: 11400000, guid: 56c7cfddea53a744aa96eb21618be23b, type: 2}
 --- !u!1 &146060083
 GameObject:
   m_ObjectHideFlags: 0
