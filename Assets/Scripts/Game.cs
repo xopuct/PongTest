@@ -7,11 +7,9 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Game : MonoBehaviour
 {
     public Scores Scores;
-    public Ball BallPrefab;
+    public Ball[] BallPrefabs;
     public Bounds BallSpawnArea;
-    public Bounds GameArea;
-    public int MinBallSpeed = 6;
-    public int MaxBallSpeed = 16;
+    public Bounds GameArea; 
     Ball ballInstance;
 
     void Start()
@@ -26,14 +24,14 @@ public class Game : MonoBehaviour
         var randomBallPos = new Vector3(Mathf.Lerp(BallSpawnArea.min.x, BallSpawnArea.max.x, Random.value),
                                         Mathf.Lerp(BallSpawnArea.min.y, BallSpawnArea.max.y, Random.value),
                                         0);
-        ballInstance = Instantiate(BallPrefab, randomBallPos, Quaternion.identity);
+        var ballPrefab = BallPrefabs[Random.Range(0, BallPrefabs.Length)];
+        ballInstance = Instantiate(ballPrefab, randomBallPos, Quaternion.identity);
         var direction = Random.insideUnitCircle;
         direction.y = Mathf.Abs(direction.y);
         direction.Normalize();
         if (ballInstance.transform.position.y - GameArea.center.y > 0)
             direction.y = -direction.y;
-        ballInstance.Direction = direction;
-        ballInstance.Speed = Random.Range(MinBallSpeed, MaxBallSpeed);
+        ballInstance.Direction = direction; 
     }
 
     private void OnDrawGizmosSelected()
