@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1665374482228679596}
   - component: {fileID: 1665374482228679571}
   - component: {fileID: 1665374482228679570}
+  - component: {fileID: -1112403477416063214}
   m_Layer: 0
   m_Name: BallBig
   m_TagString: Untagged
@@ -134,3 +135,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Direction: {x: 2, y: 1}
   Speed: 4
+--- !u!114 &-1112403477416063214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665374482228679569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdae917ac7295514c8da95456b3db660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderer: {fileID: 1665374482228679597}

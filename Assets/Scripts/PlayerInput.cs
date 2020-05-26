@@ -17,6 +17,8 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        if (Game.IsPaused)
+            return;
         if (!touched)
         {
             var racquetRect = GetRacquetRect();

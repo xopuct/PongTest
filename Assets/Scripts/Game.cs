@@ -6,10 +6,14 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Game : MonoBehaviour
 {
+    public static event Action<bool> IsPausedChanged;
+
+    public static bool IsPaused;
+
     public Scores Scores;
     public Ball[] BallPrefabs;
     public Bounds BallSpawnArea;
-    public Bounds GameArea; 
+    public Bounds GameArea;
     Ball ballInstance;
 
     void Start()
@@ -31,7 +35,7 @@ public class Game : MonoBehaviour
         direction.Normalize();
         if (ballInstance.transform.position.y - GameArea.center.y > 0)
             direction.y = -direction.y;
-        ballInstance.Direction = direction; 
+        ballInstance.Direction = direction;
     }
 
     private void OnDrawGizmosSelected()

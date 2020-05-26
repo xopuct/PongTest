@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Ball : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        if (Game.IsPaused)
+            return;
+
         transform.position += new Vector3(Direction.x, Direction.y).normalized * Speed * Time.deltaTime;
     }
 
